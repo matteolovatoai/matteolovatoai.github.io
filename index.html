@@ -15,7 +15,7 @@
             --card-bg: rgba(22, 22, 24, 0.8);
             --border-color: rgba(241, 245, 249, 0.1);
             --accent: #3b82f6; /* Blu Google/Tech */
-            --accent-hover: #2563eb; /* Blu più scuro per hover */
+            --accent-hover: #2563eb; 
             --leaf-color: #4ade80;
         }
 
@@ -238,7 +238,7 @@
             align-items: center;
             gap: 8px;
             margin-top: 25px;
-            padding: 12px 24px; /* Un po' più grande per stile moderno */
+            padding: 12px 24px;
             
             /* Colore Fisso Stile Google: Sfondo Blu, Testo Bianco */
             background-color: var(--accent); 
@@ -299,7 +299,7 @@
     <div class="container">
         <nav>
             <button class="nav-btn" id="lang-btn" aria-label="Switch Language">
-                <span id="lang-icon">🇮🇹</span>
+                <span id="lang-icon">🇬🇧</span>
             </button>
             <button class="nav-btn" id="theme-btn" aria-label="Switch Theme">
                 <i class="fas fa-moon"></i>
@@ -426,6 +426,7 @@
         const langBtn = document.getElementById('lang-btn');
         const langIcon = document.getElementById('lang-icon');
         
+        // Default language
         let currentLang = localStorage.getItem('lang') || 'en';
         applyLanguage(currentLang);
 
@@ -436,7 +437,9 @@
         });
 
         function applyLanguage(lang) {
-            langIcon.textContent = lang === 'en' ? '🇮🇹' : '🇬🇧';
+            // MODIFICA QUI: Se EN mostra bandiera Inglese, se IT mostra bandiera Italiana
+            langIcon.textContent = lang === 'en' ? '🇬🇧' : '🇮🇹';
+            
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (translations[lang][key]) {
