@@ -14,8 +14,8 @@
             --text-secondary: #94a3b8; 
             --card-bg: rgba(22, 22, 24, 0.8);
             --border-color: rgba(241, 245, 249, 0.1);
-            --accent: #3b82f6; 
-            --accent-glow: rgba(59, 130, 246, 0.25);
+            --accent: #3b82f6; /* Blu Google/Tech */
+            --accent-hover: #2563eb; /* Blu più scuro per hover */
             --leaf-color: #4ade80;
         }
 
@@ -26,8 +26,8 @@
             --text-secondary: #64748b;
             --card-bg: #ffffff;
             --border-color: #e2e8f0;
-            --accent: #2563eb;
-            --accent-glow: rgba(37, 99, 235, 0.1);
+            --accent: #1a73e8; /* Blu Google ufficiale */
+            --accent-hover: #1557b0;
             --leaf-color: #16a34a;
         }
 
@@ -51,7 +51,7 @@
             display: flex;
             justify-content: flex-end;
             padding-top: 20px;
-            gap: 10px; /* Spazio tra i bottoni */
+            gap: 10px;
         }
 
         .nav-btn {
@@ -199,7 +199,7 @@
 
         .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             border-color: var(--accent);
         }
 
@@ -225,24 +225,38 @@
             margin-right: 10px;
         }
 
+        /* LIGHT MODE BADGE FIX */
+        [data-theme="light"] .stats-badge {
+            background: rgba(26, 115, 232, 0.1);
+            border-color: rgba(26, 115, 232, 0.3);
+            color: #1a73e8;
+        }
+
+        /* --- GOOGLE STYLE BUTTON (FIXED) --- */
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
             margin-top: 25px;
-            padding: 10px 20px;
-            background-color: var(--text-primary);
-            color: #000000;
+            padding: 12px 24px; /* Un po' più grande per stile moderno */
+            
+            /* Colore Fisso Stile Google: Sfondo Blu, Testo Bianco */
+            background-color: var(--accent); 
+            color: #ffffff !important; 
+            
             text-decoration: none;
             border-radius: 6px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            transition: background 0.2s, transform 0.2s;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
+
         .btn:hover { 
-            background-color: var(--accent); 
-            color: #ffffff;
+            background-color: var(--accent-hover); 
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
         }
 
         /* --- FOOTER --- */
@@ -262,8 +276,8 @@
             margin-top: 15px;
             padding: 6px 14px;
             border-radius: 20px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(125, 125, 125, 0.1);
+            border: 1px solid var(--border-color);
             font-size: 0.75rem;
             color: var(--text-secondary);
         }
@@ -361,7 +375,7 @@
     </div>
 
     <script>
-        // --- TEXT TRANSLATIONS ---
+        // --- TRANSLATIONS ---
         const translations = {
             en: {
                 role: 'Junior AI Specialist & <span>MLOps Engineer</span>',
@@ -380,14 +394,14 @@
                 skills_title: 'Stack Tecnologico',
                 projects_title: 'Progetto Principale',
                 proj1_title: 'Sistema Predizione Immobiliare',
-                proj1_desc: 'Pipeline completa per la stima immobiliare[cite: 10]. Include analisi esplorativa (EDA), rimozione statistica degli outlier e deployment con interfaccia web interattiva[cite: 12, 14].',
+                proj1_desc: 'Pipeline completa per la stima immobiliare. Include analisi esplorativa (EDA), rimozione statistica degli outlier e deployment con interfaccia web interattiva.',
                 view_code: 'Vedi Codice',
                 footer: '© 2026 Matteo Lovato. Creato con codice.',
                 oled: 'Modalità Risparmio OLED'
             }
         };
 
-        // --- THEME LOGIC ---
+        // --- THEME ---
         const themeBtn = document.getElementById('theme-btn');
         const themeIcon = themeBtn.querySelector('i');
         const htmlElement = document.documentElement;
@@ -408,11 +422,10 @@
             themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
         }
 
-        // --- LANGUAGE LOGIC ---
+        // --- LANGUAGE ---
         const langBtn = document.getElementById('lang-btn');
         const langIcon = document.getElementById('lang-icon');
         
-        // Default language based on browser or 'en'
         let currentLang = localStorage.getItem('lang') || 'en';
         applyLanguage(currentLang);
 
@@ -423,10 +436,7 @@
         });
 
         function applyLanguage(lang) {
-            // Update Icon (Show the flag of the OTHER language to switch to)
             langIcon.textContent = lang === 'en' ? '🇮🇹' : '🇬🇧';
-            
-            // Update Texts
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (translations[lang][key]) {
