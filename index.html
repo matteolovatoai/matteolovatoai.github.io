@@ -8,25 +8,21 @@
     <style>
         /* --- CONFIGURAZIONE COLORI --- */
         :root {
-            /* --- DARK MODE (Default - OLED) --- */
-            --bg-color: #000000; /* Nero Assoluto */
-            
-            /* Bianco Ghiaccio (Ice White) - Non spara negli occhi come il #FFF */
+            /* DARK MODE (Default - OLED) */
+            --bg-color: #000000;
             --text-primary: #f1f5f9; 
             --text-secondary: #94a3b8; 
-            
-            --card-bg: rgba(22, 22, 24, 0.8); /* Grigio scuro quasi nero */
-            --border-color: rgba(241, 245, 249, 0.1); /* Bordo ghiaccio sottile */
-            
-            --accent: #3b82f6; /* Blu Tech */
+            --card-bg: rgba(22, 22, 24, 0.8);
+            --border-color: rgba(241, 245, 249, 0.1);
+            --accent: #3b82f6; 
             --accent-glow: rgba(59, 130, 246, 0.25);
             --leaf-color: #4ade80;
         }
 
-        /* --- LIGHT MODE --- */
+        /* LIGHT MODE */
         [data-theme="light"] {
-            --bg-color: #f8fafc; /* Ghiaccio chiarissimo */
-            --text-primary: #1e293b; /* Blu scuro profondo */
+            --bg-color: #f8fafc;
+            --text-primary: #1e293b;
             --text-secondary: #64748b;
             --card-bg: #ffffff;
             --border-color: #e2e8f0;
@@ -50,14 +46,15 @@
             padding: 20px 20px 40px 20px;
         }
 
-        /* --- NAVIGAZIONE & TOGGLE --- */
+        /* --- NAVIGAZIONE & TOGGLES --- */
         nav {
             display: flex;
             justify-content: flex-end;
             padding-top: 20px;
+            gap: 10px; /* Spazio tra i bottoni */
         }
 
-        .theme-toggle {
+        .nav-btn {
             background: transparent;
             border: 1px solid var(--border-color);
             color: var(--text-primary);
@@ -72,7 +69,7 @@
             transition: all 0.3s;
         }
 
-        .theme-toggle:hover {
+        .nav-btn:hover {
             border-color: var(--accent);
             background-color: var(--card-bg);
             color: var(--accent);
@@ -93,10 +90,9 @@
         .hero-text h1 {
             font-size: 3.5rem;
             margin: 0;
-            color: var(--text-primary); /* Colore solido Ghiaccio */
+            color: var(--text-primary);
             font-weight: 800;
             letter-spacing: -1px;
-            /* Leggera ombra per dare profondità sul nero senza usare gradienti */
             text-shadow: 0 0 25px rgba(241, 245, 249, 0.15); 
         }
 
@@ -142,7 +138,6 @@
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--border-color);
-            /* Glow molto sottile e freddo */
             box-shadow: 0 0 30px rgba(59, 130, 246, 0.15); 
             transition: transform 0.3s;
         }
@@ -179,7 +174,7 @@
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             padding: 8px 18px;
-            border-radius: 6px; /* Più squadrato, più tecnico */
+            border-radius: 6px;
             font-size: 0.9rem;
             color: var(--text-primary);
             display: flex;
@@ -219,7 +214,7 @@
         
         .stats-badge {
             display: inline-block;
-            background: rgba(59, 130, 246, 0.1); /* Blu molto scarico */
+            background: rgba(59, 130, 246, 0.1); 
             border: 1px solid rgba(59, 130, 246, 0.3);
             color: #60a5fa;
             padding: 5px 12px;
@@ -236,8 +231,8 @@
             gap: 8px;
             margin-top: 25px;
             padding: 10px 20px;
-            background-color: var(--text-primary); /* Bottone Bianco Ghiaccio */
-            color: #000000; /* Testo Nero per massimo contrasto */
+            background-color: var(--text-primary);
+            color: #000000;
             text-decoration: none;
             border-radius: 6px;
             font-weight: 700;
@@ -273,7 +268,6 @@
             color: var(--text-secondary);
         }
 
-        /* Mobile */
         @media (max-width: 768px) {
             .hero { flex-direction: column-reverse; text-align: center; padding: 40px 0; }
             .profile-wrapper { width: 180px; height: 180px; margin: 0 auto; }
@@ -290,7 +284,10 @@
 
     <div class="container">
         <nav>
-            <button class="theme-toggle" id="theme-btn" aria-label="Cambia tema">
+            <button class="nav-btn" id="lang-btn" aria-label="Switch Language">
+                <span id="lang-icon">🇮🇹</span>
+            </button>
+            <button class="nav-btn" id="theme-btn" aria-label="Switch Theme">
                 <i class="fas fa-moon"></i>
             </button>
         </nav>
@@ -298,9 +295,9 @@
         <section class="hero">
             <div class="hero-text">
                 <h1>Matteo Lovato</h1>
-                <h2>Junior AI Specialist & <span>MLOps Engineer</span></h2>
-                <p>
-                    Dal dato grezzo al deployment. Costruisco pipeline di Intelligenza Artificiale scalabili e ottimizzate per la produzione.
+                <h2 data-i18n="role">Junior AI Specialist & <span>MLOps Engineer</span></h2>
+                <p data-i18n="bio">
+                    From raw data to deployment. Building scalable Artificial Intelligence pipelines optimized for production.
                 </p>
                 <div class="social-links">
                     <a href="https://github.com/matteolovatoai" target="_blank"><i class="fab fa-github"></i></a>
@@ -315,7 +312,7 @@
         </section>
 
         <section>
-            <h3 class="section-title">Tech Stack</h3>
+            <h3 class="section-title" data-i18n="skills_title">Tech Stack</h3>
             <div class="skills-grid">
                 <div class="skill-tag"><i class="fab fa-python"></i> Python</div>
                 <div class="skill-tag"><i class="fas fa-database"></i> SQL & Pandas</div>
@@ -328,18 +325,18 @@
         </section>
 
         <section>
-            <h3 class="section-title">Featured Project</h3>
+            <h3 class="section-title" data-i18n="projects_title">Featured Project</h3>
             
             <div class="project-card">
                 <div class="project-header">
                     <div>
-                        <h4 class="project-title">Housing Price Prediction System</h4>
+                        <h4 class="project-title" data-i18n="proj1_title">Housing Price Prediction System</h4>
                         <span style="font-size: 0.8rem; color: var(--text-secondary); letter-spacing: 1px; margin-top:5px; display:block;">END-TO-END ML PIPELINE</span>
                     </div>
                 </div>
                 
-                <p style="color: var(--text-secondary); margin-bottom: 20px; margin-top: 15px;">
-                    Pipeline completa per la stima immobiliare. Include analisi esplorativa (EDA), rimozione statistica degli outlier e deployment con interfaccia web interattiva.
+                <p style="color: var(--text-secondary); margin-bottom: 20px; margin-top: 15px;" data-i18n="proj1_desc">
+                    Complete pipeline for real estate valuation. Includes exploratory analysis (EDA), statistical outlier removal, and deployment with an interactive web interface.
                 </p>
 
                 <div>
@@ -348,47 +345,94 @@
                 </div>
 
                 <a href="https://github.com/matteolovatoai/house-price-prediction" target="_blank" class="btn">
-                    View Code <i class="fab fa-github"></i>
+                    <span data-i18n="view_code">View Code</span> <i class="fab fa-github" style="margin-left:5px;"></i>
                 </a>
             </div>
         </section>
 
         <footer>
-            <p>&copy; 2026 Matteo Lovato. Built with code.</p>
+            <p data-i18n="footer">© 2026 Matteo Lovato. Built with code.</p>
             
             <div class="oled-note">
                 <i class="fas fa-leaf" style="color: var(--leaf-color);"></i>
-                <span>Pure Black OLED Mode</span>
+                <span data-i18n="oled">Pure Black OLED Mode</span>
             </div>
         </footer>
     </div>
 
     <script>
+        // --- TEXT TRANSLATIONS ---
+        const translations = {
+            en: {
+                role: 'Junior AI Specialist & <span>MLOps Engineer</span>',
+                bio: 'From raw data to deployment. Building scalable Artificial Intelligence pipelines optimized for production.',
+                skills_title: 'Tech Stack',
+                projects_title: 'Featured Project',
+                proj1_title: 'Housing Price Prediction System',
+                proj1_desc: 'Complete pipeline for real estate valuation. Includes exploratory analysis (EDA), statistical outlier removal, and deployment with an interactive web interface.',
+                view_code: 'View Code',
+                footer: '© 2026 Matteo Lovato. Built with code.',
+                oled: 'Pure Black OLED Mode'
+            },
+            it: {
+                role: 'Junior AI Specialist & <span>MLOps Engineer</span>',
+                bio: 'Dal dato grezzo al deployment. Sviluppo pipeline di Intelligenza Artificiale scalabili e ottimizzate per la produzione.',
+                skills_title: 'Stack Tecnologico',
+                projects_title: 'Progetto Principale',
+                proj1_title: 'Sistema Predizione Immobiliare',
+                proj1_desc: 'Pipeline completa per la stima immobiliare[cite: 10]. Include analisi esplorativa (EDA), rimozione statistica degli outlier e deployment con interfaccia web interattiva[cite: 12, 14].',
+                view_code: 'Vedi Codice',
+                footer: '© 2026 Matteo Lovato. Creato con codice.',
+                oled: 'Modalità Risparmio OLED'
+            }
+        };
+
+        // --- THEME LOGIC ---
         const themeBtn = document.getElementById('theme-btn');
         const themeIcon = themeBtn.querySelector('i');
         const htmlElement = document.documentElement;
-
+        
         const savedTheme = localStorage.getItem('theme') || 'dark';
         htmlElement.setAttribute('data-theme', savedTheme);
-        updateIcon(savedTheme);
+        updateThemeIcon(savedTheme);
 
         themeBtn.addEventListener('click', () => {
-            const currentTheme = htmlElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            htmlElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateIcon(newTheme);
+            const current = htmlElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            htmlElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            updateThemeIcon(next);
         });
 
-        function updateIcon(theme) {
-            if (theme === 'dark') {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            } else {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            }
+        function updateThemeIcon(theme) {
+            themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+        }
+
+        // --- LANGUAGE LOGIC ---
+        const langBtn = document.getElementById('lang-btn');
+        const langIcon = document.getElementById('lang-icon');
+        
+        // Default language based on browser or 'en'
+        let currentLang = localStorage.getItem('lang') || 'en';
+        applyLanguage(currentLang);
+
+        langBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'it' : 'en';
+            localStorage.setItem('lang', currentLang);
+            applyLanguage(currentLang);
+        });
+
+        function applyLanguage(lang) {
+            // Update Icon (Show the flag of the OTHER language to switch to)
+            langIcon.textContent = lang === 'en' ? '🇮🇹' : '🇬🇧';
+            
+            // Update Texts
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
         }
     </script>
 </body>
