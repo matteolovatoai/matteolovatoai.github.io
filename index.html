@@ -41,12 +41,12 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px; /* Allargato un po' per le card */
             margin: 0 auto;
             padding: 20px 20px 40px 20px;
         }
 
-        /* --- NAVIGAZIONE & TOGGLES --- */
+        /* --- NAVIGAZIONE --- */
         nav {
             display: flex;
             justify-content: flex-end;
@@ -80,7 +80,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 60px 0;
+            padding: 80px 0;
             gap: 40px;
             animation: fadeIn 0.8s ease-out;
         }
@@ -144,10 +144,10 @@
 
         .profile-img:hover { transform: scale(1.03); border-color: var(--accent); }
 
-        /* --- SEZIONI --- */
+        /* --- SEZIONI GENERALI --- */
         .section-title {
             font-size: 1.8rem;
-            margin: 60px 0 25px 0;
+            margin: 80px 0 30px 0;
             display: flex;
             align-items: center;
             gap: 12px;
@@ -163,29 +163,54 @@
             border-radius: 4px;
         }
 
-        /* --- SKILLS --- */
-        .skills-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+        /* --- TECH STACK CARDS (NUOVO) --- */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Responsive */
+            gap: 20px;
         }
 
-        .skill-tag {
+        .tech-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 8px 18px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            color: var(--text-primary);
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
+            justify-content: center;
         }
 
-        .skill-tag:hover { 
-            border-color: var(--accent); 
+        .tech-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
             color: var(--accent);
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        .tech-card:hover .tech-icon {
+            transform: scale(1.1);
+        }
+
+        .tech-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .tech-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
         }
 
         /* --- PROJECTS --- */
@@ -193,7 +218,7 @@
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 28px;
+            padding: 30px;
             transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
         }
 
@@ -225,25 +250,20 @@
             margin-right: 10px;
         }
 
-        /* LIGHT MODE BADGE FIX */
         [data-theme="light"] .stats-badge {
             background: rgba(26, 115, 232, 0.1);
             border-color: rgba(26, 115, 232, 0.3);
             color: #1a73e8;
         }
 
-        /* --- GOOGLE STYLE BUTTON (FIXED) --- */
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
             margin-top: 25px;
             padding: 12px 24px;
-            
-            /* Colore Fisso Stile Google: Sfondo Blu, Testo Bianco */
             background-color: var(--accent); 
             color: #ffffff !important; 
-            
             text-decoration: none;
             border-radius: 6px;
             font-weight: 600;
@@ -286,6 +306,7 @@
             .hero { flex-direction: column-reverse; text-align: center; padding: 40px 0; }
             .profile-wrapper { width: 180px; height: 180px; margin: 0 auto; }
             .social-links { justify-content: center; display: flex; }
+            .tech-grid { grid-template-columns: 1fr 1fr; } /* 2 colonne su mobile */
         }
 
         @keyframes fadeIn {
@@ -319,7 +340,6 @@
                     <a href="mailto:matteolovatoai@gmail.com"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
-            
             <div class="profile-wrapper">
                 <img src="profile.jpg" alt="Matteo Lovato" class="profile-img">
             </div>
@@ -327,20 +347,42 @@
 
         <section>
             <h3 class="section-title" data-i18n="skills_title">Tech Stack</h3>
-            <div class="skills-grid">
-                <div class="skill-tag"><i class="fab fa-python"></i> Python</div>
-                <div class="skill-tag"><i class="fas fa-database"></i> SQL & Pandas</div>
-                <div class="skill-tag"><i class="fas fa-brain"></i> Scikit-Learn</div>
-                <div class="skill-tag"><i class="fab fa-docker"></i> Docker</div>
-                <div class="skill-tag"><i class="fab fa-git-alt"></i> Git</div>
-                <div class="skill-tag"><i class="fas fa-server"></i> MLOps</div>
-                <div class="skill-tag"><i class="fas fa-chart-line"></i> Streamlit</div>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <i class="fab fa-python tech-icon"></i>
+                    <div class="tech-name">Python</div>
+                    <div class="tech-desc" data-i18n="skill_python">Core language for AI & Data Analysis.</div>
+                </div>
+                <div class="tech-card">
+                    <i class="fas fa-brain tech-icon"></i>
+                    <div class="tech-name">Scikit-Learn</div>
+                    <div class="tech-desc" data-i18n="skill_ml">Predictive modeling & Algorithms.</div>
+                </div>
+                <div class="tech-card">
+                    <i class="fas fa-database tech-icon"></i>
+                    <div class="tech-name">Pandas & SQL</div>
+                    <div class="tech-desc" data-i18n="skill_data">Data manipulation & Querying.</div>
+                </div>
+                <div class="tech-card">
+                    <i class="fab fa-docker tech-icon"></i>
+                    <div class="tech-name">Docker</div>
+                    <div class="tech-desc" data-i18n="skill_docker">Containerization for reproducible AI.</div>
+                </div>
+                <div class="tech-card">
+                    <i class="fas fa-cogs tech-icon"></i>
+                    <div class="tech-name">MLOps</div>
+                    <div class="tech-desc" data-i18n="skill_mlops">End-to-end model lifecycle management.</div>
+                </div>
+                <div class="tech-card">
+                    <i class="fas fa-chart-line tech-icon"></i>
+                    <div class="tech-name">Streamlit</div>
+                    <div class="tech-desc" data-i18n="skill_web">Interactive Data Apps & Dashboards.</div>
+                </div>
             </div>
         </section>
 
         <section>
             <h3 class="section-title" data-i18n="projects_title">Featured Project</h3>
-            
             <div class="project-card">
                 <div class="project-header">
                     <div>
@@ -348,16 +390,13 @@
                         <span style="font-size: 0.8rem; color: var(--text-secondary); letter-spacing: 1px; margin-top:5px; display:block;">END-TO-END ML PIPELINE</span>
                     </div>
                 </div>
-                
                 <p style="color: var(--text-secondary); margin-bottom: 20px; margin-top: 15px;" data-i18n="proj1_desc">
                     Complete pipeline for real estate valuation. Includes exploratory analysis (EDA), statistical outlier removal, and deployment with an interactive web interface.
                 </p>
-
                 <div>
                     <span class="stats-badge">📈 R² Score: 0.70</span>
                     <span class="stats-badge">🚀 +63% Accuracy</span>
                 </div>
-
                 <a href="https://github.com/matteolovatoai/house-price-prediction" target="_blank" class="btn">
                     <span data-i18n="view_code">View Code</span> <i class="fab fa-github" style="margin-left:5px;"></i>
                 </a>
@@ -366,7 +405,6 @@
 
         <footer>
             <p data-i18n="footer">© 2026 Matteo Lovato. Built with code.</p>
-            
             <div class="oled-note">
                 <i class="fas fa-leaf" style="color: var(--leaf-color);"></i>
                 <span data-i18n="oled">Pure Black OLED Mode</span>
@@ -381,6 +419,14 @@
                 role: 'Junior AI Specialist & <span>MLOps Engineer</span>',
                 bio: 'From raw data to deployment. Building scalable Artificial Intelligence pipelines optimized for production.',
                 skills_title: 'Tech Stack',
+                // Tech Stack Descriptions
+                skill_python: 'Core language for AI & Data Analysis.',
+                skill_ml: 'Predictive modeling & Algorithms.',
+                skill_data: 'Data manipulation & Querying.',
+                skill_docker: 'Containerization for reproducible AI.',
+                skill_mlops: 'End-to-end model lifecycle management.',
+                skill_web: 'Interactive Data Apps & Dashboards.',
+                // Projects
                 projects_title: 'Featured Project',
                 proj1_title: 'Housing Price Prediction System',
                 proj1_desc: 'Complete pipeline for real estate valuation. Includes exploratory analysis (EDA), statistical outlier removal, and deployment with an interactive web interface.',
@@ -392,6 +438,14 @@
                 role: 'Junior AI Specialist & <span>MLOps Engineer</span>',
                 bio: 'Dal dato grezzo al deployment. Sviluppo pipeline di Intelligenza Artificiale scalabili e ottimizzate per la produzione.',
                 skills_title: 'Stack Tecnologico',
+                // Tech Stack Descriptions IT
+                skill_python: 'Linguaggio principale per sviluppo AI.',
+                skill_ml: 'Modellazione predittiva e Algoritmi.',
+                skill_data: 'Manipolazione dati e Querying.',
+                skill_docker: 'Containerizzazione per AI riproducibile.',
+                skill_mlops: 'Gestione del ciclo di vita del modello.',
+                skill_web: 'Dashboard e Web App interattive.',
+                // Projects IT
                 projects_title: 'Progetto Principale',
                 proj1_title: 'Sistema Predizione Immobiliare',
                 proj1_desc: 'Pipeline completa per la stima immobiliare. Include analisi esplorativa (EDA), rimozione statistica degli outlier e deployment con interfaccia web interattiva.',
@@ -426,7 +480,6 @@
         const langBtn = document.getElementById('lang-btn');
         const langIcon = document.getElementById('lang-icon');
         
-        // Default language
         let currentLang = localStorage.getItem('lang') || 'en';
         applyLanguage(currentLang);
 
@@ -437,7 +490,6 @@
         });
 
         function applyLanguage(lang) {
-            // MODIFICA QUI: Se EN mostra bandiera Inglese, se IT mostra bandiera Italiana
             langIcon.textContent = lang === 'en' ? '🇬🇧' : '🇮🇹';
             
             document.querySelectorAll('[data-i18n]').forEach(element => {
