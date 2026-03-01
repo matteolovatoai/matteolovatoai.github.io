@@ -41,7 +41,7 @@
         }
 
         .container {
-            max-width: 1000px; /* Allargato un po' per le card */
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px 20px 40px 20px;
         }
@@ -163,11 +163,26 @@
             border-radius: 4px;
         }
 
-        /* --- TECH STACK CARDS (NUOVO) --- */
+        /* --- TECH STACK GRID (RESPONSIVE 1-2-3) --- */
         .tech-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Responsive */
             gap: 20px;
+            /* Default Mobile: 1 Colonna */
+            grid-template-columns: 1fr;
+        }
+
+        /* Tablet (Schermi Medi >= 600px): 2 Colonne */
+        @media (min-width: 600px) {
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Desktop (Schermi Grandi >= 900px): 3 Colonne */
+        @media (min-width: 900px) {
+            .tech-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         .tech-card {
@@ -306,7 +321,7 @@
             .hero { flex-direction: column-reverse; text-align: center; padding: 40px 0; }
             .profile-wrapper { width: 180px; height: 180px; margin: 0 auto; }
             .social-links { justify-content: center; display: flex; }
-            .tech-grid { grid-template-columns: 1fr 1fr; } /* 2 colonne su mobile */
+            /* Il tech-grid è gestito dalle media queries sopra */
         }
 
         @keyframes fadeIn {
